@@ -1,193 +1,472 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
+<div id="scroll-progress"></div>
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Profile Dashboard</title>
-  <!-- Tailwind Play CDN for quick styling -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <style>
-    /* small custom tweaks */
-    body { background: linear-gradient(180deg,#f8fafc,#eef2ff); }
-    .glass { background: rgba(255,255,255,0.6); backdrop-filter: blur(6px); }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clarence Ariate - Creative Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+    </style>
 </head>
-<body class="min-h-screen p-6 font-sans">
-  <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6">
-    <!-- Left column: profile card -->
-    <aside class="lg:col-span-1">
-      <div class="p-6 rounded-2xl glass shadow-lg">
-        <div class="flex items-center gap-4">
-          <img src="https://i.pravatar.cc/120?u=profile-dashboard" alt="avatar" class="w-24 h-24 rounded-xl object-cover ring-4 ring-white shadow">
-          <div>
-            <h2 class="text-2xl font-semibold">Axl Rose Supranes</h2>
-            <p class="text-sm text-slate-600">Frontend Developer • USeP Student</p>
-            <div class="mt-3 text-sm text-slate-500">
-              <div><strong>Location:</strong> Tagum, Philippines</div>
-              <div><strong>Email:</strong> axl@example.com</div>
-            </div>
-          </div>
-        </div>
 
-        <div class="mt-6 grid grid-cols-3 gap-3">
-          <div class="text-center">
-            <div class="text-sm text-slate-500">Projects</div>
-            <div class="text-lg font-medium">12</div>
-          </div>
-          <div class="text-center">
-            <div class="text-sm text-slate-500">Followers</div>
-            <div class="text-lg font-medium">1.4k</div>
-          </div>
-          <div class="text-center">
-            <div class="text-sm text-slate-500">Rating</div>
-            <div class="text-lg font-medium">9.1</div>
-          </div>
-        </div>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Florence</div>
 
-        <div class="mt-6">
-          <button id="editProfile" class="w-full rounded-lg py-2 px-4 bg-indigo-600 text-white font-medium hover:bg-indigo-500">Edit profile</button>
-        </div>
-      </div>
-
-      <div class="mt-6 p-4 rounded-2xl glass shadow-lg">
-        <h3 class="text-sm text-slate-700 font-semibold mb-3">Quick Links</h3>
-        <ul class="space-y-2 text-sm text-slate-600">
-          <li><a href="#" class="block p-2 rounded hover:bg-slate-100">Account settings</a></li>
-          <li><a href="#" class="block p-2 rounded hover:bg-slate-100">Privacy</a></li>
-          <li><a href="#" class="block p-2 rounded hover:bg-slate-100">Notifications</a></li>
-        </ul>
-      </div>
-    </aside>
-
-    <!-- Right column: main dashboard -->
-    <main class="lg:col-span-3">
-      <div class="p-6 rounded-2xl glass shadow-lg">
-        <div class="flex items-center justify-between">
-          <div>
-            <h1 class="text-2xl font-bold">Profile Dashboard</h1>
-            <p class="text-sm text-slate-600">Overview of activity, stats and recent items</p>
-          </div>
-          <div class="flex items-center gap-3">
-            <input type="search" placeholder="Search..." class="px-3 py-2 rounded-lg border focus:outline-none" />
-            <button class="px-4 py-2 rounded-lg bg-slate-800 text-white">Share</button>
-          </div>
-        </div>
-
-        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="p-4 rounded-lg bg-white shadow-sm">
-            <div class="text-sm text-slate-500">Weekly Visits</div>
-            <div class="text-2xl font-semibold mt-1">8,421</div>
-            <canvas id="visitsChart" height="80"></canvas>
-          </div>
-
-          <div class="p-4 rounded-lg bg-white shadow-sm">
-            <div class="text-sm text-slate-500">Task Completion</div>
-            <div class="text-2xl font-semibold mt-1">76%</div>
-            <canvas id="taskChart" height="120"></canvas>
-          </div>
-
-          <div class="p-4 rounded-lg bg-white shadow-sm">
-            <div class="text-sm text-slate-500">Earnings (this month)</div>
-            <div class="text-2xl font-semibold mt-1">₱12,580</div>
-            <div class="mt-4 text-xs text-slate-500">Compared to last month: +14%</div>
-          </div>
-        </div>
-
-        <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <section class="p-4 rounded-lg bg-white shadow-sm">
-            <h3 class="font-semibold">Recent Activity</h3>
-            <ul class="mt-3 space-y-3 text-sm text-slate-600">
-              <li class="flex items-start gap-3">
-                <div class="w-2 h-2 bg-indigo-500 rounded-full mt-2"></div>
-                <div>
-                  <div class="font-medium">Created new project "Le_Chai"</div>
-                  <div class="text-xs">2 days ago • Java (Android)</div>
-                </div>
-              </li>
-              <li class="flex items-start gap-3">
-                <div class="w-2 h-2 bg-amber-500 rounded-full mt-2"></div>
-                <div>
-                  <div class="font-medium">Converted Vue component to Composition API</div>
-                  <div class="text-xs">5 days ago • Vue 3</div>
-                </div>
-              </li>
-              <li class="flex items-start gap-3">
-                <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
-                <div>
-                  <div class="font-medium">Submitted Capstone proposal</div>
-                  <div class="text-xs">1 week ago • USeP</div>
-                </div>
-              </li>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-          </section>
 
-          <section class="p-4 rounded-lg bg-white shadow-sm">
-            <h3 class="font-semibold">Profile Completeness</h3>
-            <div class="mt-3">
-              <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
-                <div id="progressBar" class="h-full rounded-full" style="width:76%; background:linear-gradient(90deg,#7c3aed,#06b6d4)"></div>
-              </div>
-              <div class="mt-3 text-sm text-slate-500">Keep your profile updated to reach 100% completeness.</div>
-
-              <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
-                <button class="py-2 rounded-lg border">Add portfolio</button>
-                <button class="py-2 rounded-lg border">Upload resume</button>
-              </div>
+            <!-- Hamburger -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-          </section>
         </div>
+    </nav>
 
-      </div>
 
-      <div class="mt-6 p-4 rounded-2xl glass shadow-lg">
-        <h3 class="text-lg font-semibold mb-3">Skills</h3>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-3 py-1 rounded-full border text-sm">HTML</span>
-          <span class="px-3 py-1 rounded-full border text-sm">CSS</span>
-          <span class="px-3 py-1 rounded-full border text-sm">Vue 3</span>
-          <span class="px-3 py-1 rounded-full border text-sm">Android</span>
-          <span class="px-3 py-1 rounded-full border text-sm">OpenCV</span>
-          <span class="px-3 py-1 rounded-full border text-sm">Tailwind</span>
-        </div>
-      </div>
+    <main>
+        <!-- first kuan -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="badge">● Available for freelance</span>
+
+                <h1>
+                    Crafting Visual <br />
+                    Stories that <br />
+                    <span>Engage & Inspire</span>
+                </h1>
+
+                <p>
+                    Graphics & Social Media Manager specializing in creating compelling
+                    visual narratives that connect brands with their audiences and drive
+                    meaningful engagement.
+                </p>
+
+                <div class="buttons">
+                    <a href="#" class="btn primary">View My Work</a>
+                    <a href="#" class="btn secondary">Let's Connect</a>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img src="formal.jpg" alt="Profile Image" />
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="stat-card">
+                <h2>150+</h2>
+                <p>Projects Completed</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>25+</h2>
+                <p>Happy Clients</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>25+</h2>
+                <p>Testimonials</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>2+</h2>
+                <p>Years Experience</p>
+            </div>
+        </section>
+
+        <section class="about">
+            <div class="about-image">
+                <img src="profile.jpg" alt="Profile photo">
+            </div>
+
+            <div class="about-content">
+                <h2>
+                    Hello, I'm <span>Clarence Ariate</span><br>
+                    <!-- <span>Ariate</span> -->
+                </h2>
+
+                <p>
+                    I’m a creative and results-driven Digital Marketing Specialist,
+                    Social Media Manager, and Graphic Designer passionate about blending
+                    design, strategy, and storytelling to help brands build meaningful
+                    connections with their audiences.
+                </p>
+
+                <p>
+                    With a strong background in education and technology, I approach every
+                    project with empathy, innovation, and authenticity—creating strategies
+                    and visuals that not only engage but also inspire.
+                </p>
+
+                <a href="#" class="btn-download">Download Resume</a>
+            </div>
+        </section>
+
+        <section class="clients">
+            <h2>Trusted by Amazing Clients</h2>
+            <p>Proud to have worked with these incredible brands</p>
+
+            <div class="slider">
+                <div class="slide-track">
+                    <!-- LOGOS (duplicate for smooth loop) -->
+                    <div class="slide"><img src="profile.jpg" alt=""></div>
+                    <div class="slide"><img src="profile.jpg" alt=""></div>
+                    <div class="slide"><img src="profile.jpg" alt=""></div>
+                    <div class="slide"><img src="profile.jpg" alt=""></div>
+                    <div class="slide"><img src="profile.jpg" alt=""></div>
+                    <div class="slide"><img src="profile.jpg" alt=""></div>
+
+                    <!-- DUPLICATE -->
+                    <div class="slide"><img src="profile.jpg" alt=""></div>
+                    <div class="slide"><img src="profile.jpg" alt=""></div>
+                    <div class="slide"><img src="profile.jpg" alt=""></div>
+                    <div class="slide"><img src="profile.jpg" alt=""></div>
+                    <div class="slide"><img src="profile.jpg" alt=""></div>
+                    <div class="slide"><img src="profile.jpg" alt=""></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services">
+            <h2>Expertise & Services</h2>
+            <p>Comprehensive design solutions to bring your vision to life</p>
+
+            <div class="service-grid">
+
+                <!-- CARD -->
+                <div class="service-card">
+                    <div class="icon">🎨</div>
+                    <h3>Graphic Design</h3>
+                    <p>
+                        Creating stunning visuals that communicate brand messages
+                        effectively through typography, color theory, and composition.
+                    </p>
+
+                    <button class="toggle">Tools & Software</button>
+
+                    <div class="tools">
+                        <span>Photoshop</span>
+                        <span>Illustrator</span>
+                        <span>InDesign</span>
+                        <span>Canva</span>
+                        <span>Figma</span>
+                        <span>Lightroom</span>
+                    </div>
+                </div>
+
+                <!-- CARD -->
+                <div class="service-card">
+                    <div class="icon">✨</div>
+                    <h3>UI/UX Design</h3>
+                    <p>
+                        Designing intuitive and engaging user interfaces that provide
+                        seamless experiences and drive user satisfaction.
+                    </p>
+
+                    <button class="toggle">Tools & Software</button>
+
+                    <div class="tools">
+                        <span>Figma</span>
+                        <span>Canva</span>
+                    </div>
+                </div>
+
+                <!-- CARD (HIGHLIGHTED) -->
+                <div class="service-card active">
+                    <div class="icon">🎯</div>
+                    <h3>Brand Identity</h3>
+                    <p>
+                        Building cohesive brand identities that resonate with audiences
+                        and establish strong market presence.
+                    </p>
+
+                    <button class="toggle">Tools & Software</button>
+
+                    <div class="tools show">
+                        <span>Illustrator</span>
+                        <span>Photoshop</span>
+                        <span>Adobe Premiere Pro</span>
+                        <span>CapCut</span>
+                    </div>
+                </div>
+
+                <!-- CARD -->
+                <div class="service-card">
+                    <div class="icon">📱</div>
+                    <h3>Social Media / Graphics</h3>
+                    <p>
+                        Managing and growing social media presence with creative content
+                        that engages and converts audiences.
+                    </p>
+
+                    <button class="toggle">Tools & Software</button>
+
+                    <div class="tools show">
+                        <span>Canva</span>
+                        <span>Premiere Pro</span>
+                        <span>CapCut</span>
+                        <span>Hootsuite</span>
+                        <span>Buffer</span>
+                    </div>
+                </div>
+
+                <!-- CARD -->
+                <div class="service-card">
+                    <div class="icon">💡</div>
+                    <h3>Creative Strategy</h3>
+                    <p>
+                        Developing innovative strategies that drive engagement, build
+                        communities, and deliver measurable results.
+                    </p>
+
+                    <button class="toggle">Tools & Software</button>
+
+                    <div class="tools">
+                        <span>Google Analytics</span>
+                        <span>Google Workspace</span>
+                        <span>ClickUp</span>
+                        <span>Airtable</span>
+                        <span>Notion</span>
+                        <span>Miro</span>
+                        <span>Trello</span>
+                        <span>Asana</span>
+                    </div>
+                </div>
+
+                <!-- CARD -->
+                <div class="service-card">
+                    <div class="icon">📞</div>
+                    <h3>Communication</h3>
+                    <p>
+                        Managing and growing social media presence with creative content
+                        that engages and converts audiences.
+                    </p>
+
+                    <button class="toggle">Tools & Software</button>
+
+                    <div class="tools">
+                        <span>Slack</span>
+                        <span>Zoom</span>
+                        <span>Google Meet</span>
+                        <span>Email</span>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <section class="featured">
+            <h2>Featured Work</h2>
+            <p class="subtitle">
+                Click on any category to explore my complete portfolio gallery
+            </p>
+
+            <div class="featured-grid">
+
+                <div class="featured-card">
+                    <div class="icon">💻</div>
+                    <h3>UI/UX</h3>
+                    <p>View 5+ projects</p>
+                    <a href="#">Explore Gallery →</a>
+                </div>
+
+                <div class="featured-card">
+                    <div class="icon">🎨</div>
+                    <h3>Branding</h3>
+                    <p>View 5+ projects</p>
+                    <a href="#">Explore Gallery →</a>
+                </div>
+
+                <div class="featured-card">
+                    <div class="icon">📱</div>
+                    <h3>Graphics</h3>
+                    <p>View 100+ projects</p>
+                    <a href="#">Explore Gallery →</a>
+                </div>
+
+                <div class="featured-card">
+                    <div class="icon">✨</div>
+                    <h3>Reels</h3>
+                    <p>View 15+ projects</p>
+                    <a href="#">Explore Gallery →</a>
+                </div>
+
+                <div class="featured-card">
+                    <div class="icon">🎬</div>
+                    <h3>Video</h3>
+                    <p>View projects</p>
+                    <a href="#">Explore Gallery →</a>
+                </div>
+
+                <div class="featured-card">
+                    <div class="icon">📰</div>
+                    <h3>Newsletter</h3>
+                    <p>View 5+ projects</p>
+                    <a href="#">Explore Gallery →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h2>Client Testimonials</h2>
+            <p class="subtitle">What clients say about working together</p>
+
+            <div class="testimonial-wrapper">
+                <div class="testimonial-track">
+
+                    <!-- TESTIMONIAL -->
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote">
+                            "dsvcsdvI barely had time to think about the visuals, but you made everything so easy.
+                            The product videos and graphics are top-notch. Great job!! everything looks
+                            professional and ready to go!!!"
+                        </p>
+
+                        <div class="author">
+                            <img src="formal.jpg" alt="Client">
+                            <div>
+                                <h4>Darin Minter</h4>
+                                <span>CEO, Altricity</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DUPLICATE SAMPLE -->
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote">
+                            "Eskemberduuuuuu Amazing experience from start to finish. Communication was smooth and the
+                            results exceeded expectations."
+                        </p>
+
+                        <div class="author">
+                            <img src="formal.jpg" alt="Client">
+                            <div>
+                                <h4>Jane Doe</h4>
+                                <span>Marketing Lead</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote">
+                            "Amazing experience from start to finish. Communication was smooth and the
+                            results exceeded expectations."
+                        </p>
+
+                        <div class="author">
+                            <img src="formal.jpg" alt="Client">
+                            <div>
+                                <h4>Jane Doe</h4>
+                                <span>Marketing Lead</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- DOTS -->
+            <div class="dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+
+        </section>
+
+        <section class="contact">
+            <h2>Let's Work Together</h2>
+            <p class="subtitle">
+                Ready to bring your vision to life? Get in touch!
+            </p>
+
+            <div class="contact-grid">
+
+                <!-- EMAIL CARD -->
+                <div class="contact-card">
+                    <div class="icon-box">✉️</div>
+                    <h4>EMAIL ADDRESS</h4>
+                    <a href="mailto:florenceviachavez@gmail.com" class="contact-info">
+                        florenceviachavez@gmail.com
+                    </a>
+                    <a href="mailto:florenceviachavez@gmail.com" class="btn">
+                        Send Email
+                    </a>
+                </div>
+
+                <!-- PHONE CARD -->
+                <div class="contact-card">
+                    <div class="icon-box">📞</div>
+                    <h4>PHONE NUMBER</h4>
+                    <a href="tel:09486147109" class="contact-info">
+                        09486147109
+                    </a>
+                    <a href="tel:09486147109" class="btn">
+                        Call Now
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-content">
+
+                <h2 class="footer-name">Clarence Ariate</h2>
+                <p class="footer-role">Graphics & Social Media Manager</p>
+
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+
+                <div class="footer-socials">
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Email">✉️</a>
+                </div>
+
+                <div class="footer-divider"></div>
+
+                <p class="footer-copy">
+                    © 2025 Clarence Ariate. Made with ❤️ and creativity.
+                </p>
+
+            </div>
+        </footer>
+
+
+
     </main>
-  </div>
 
-  <script>
-    // Visits line chart
-    const visitsCtx = document.getElementById('visitsChart').getContext('2d');
-    new Chart(visitsCtx, {
-      type: 'line',
-      data: {
-        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
-        datasets: [{
-          label: 'Visits',
-          data: [820, 1020, 950, 1100, 1280, 1500, 1910],
-          borderWidth: 2,
-          fill: true,
-          tension: 0.4,
-        }]
-      },
-      options: { responsive: true, plugins: { legend: { display: false } }, scales: { x: { display: true }, y: { display: false } } }
-    });
+    <script src="script.js"></script>
 
-    // Task completion doughnut
-    const taskCtx = document.getElementById('taskChart').getContext('2d');
-    new Chart(taskCtx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Done','Remaining'],
-        datasets: [{ data: [76,24], borderWidth: 0 }]
-      },
-      options: { responsive: true, plugins:{legend:{position:'bottom'}} }
-    });
-
-    // Edit profile button demo
-    document.getElementById('editProfile').addEventListener('click', ()=>{
-      alert('Open your profile editor (this is a demo).');
-    });
-  </script>
 </body>
+
 </html>
